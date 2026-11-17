@@ -36,8 +36,6 @@ The full analysis is in [`notebooks/vesia_splitter.ipynb`](notebooks/vesia_split
 | 9 | Would it work? | Compared his changeup today, the splitter target and Yesavage's real splitter, then predicted Vesia's splitter by measuring each pitch's movement direction (`arctan2`) and transferring Yesavage's four-seamer-to-splitter change onto Vesia's four-seamer. |
 | 10 | What's the story? | Summed up the case in one hero chart: drop below the fastball and arm-angle difference for the changeup, the target and Yesavage's splitter. |
 
-![Vesia's arsenal with the splitter target zone](outputs/charts/step08_arsenal_with_splitter.png)
-
 ## Findings
 
 ### The comparison
