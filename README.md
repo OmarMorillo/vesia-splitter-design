@@ -44,7 +44,7 @@ The full analysis is in [`notebooks/vesia_splitter.ipynb`](notebooks/vesia_split
 |---|---|---|---|
 | Velocity gap (mph) | −9.3 | −8 to −9.5 | −11.3 |
 | IVB gap (in) | −5.7 | −13 to −16 | −12.7 |
-| Arm-side break (in) | 10.1 | 7 to 11 | 11.6 |
+| Horizontal break (in) | 10.1 | 7 to 11 | 11.6 |
 | Arm angle gap (degrees) | −6.6 | within ±2 | 0.1 |
 | Release side gap (in) | 4.9 | within 1–2 | 1.0 |
 | VAA gap (degrees) | −2.3 | steeper than −2.3 | −3.2 |
