@@ -12,6 +12,7 @@ A pitch design case built from 2026 Statcast data: should a high-slot reliever r
 | **Answer** | Yes. His changeup finishes only 5.7" below his four-seamer in induced vertical break (IVB) and leaves his hand 6.6 (degrees) lower and almost 5" wider, so it neither drops away from the fastball nor hides behind it. |
 | **The spec** | 82.5–84 mph, 1,250–1,450 rpm, 5–8" of IVB, 7–11" of arm-side run, released within 2 (degrees) of his fastball's 69 (degrees) arm angle. That pitch would finish 13–16" below the four-seamer. |
 | **The proof** | Trey Yesavage, the full-season splitter pitcher with the slot closest to Vesia's (66 degrees), already throws it: 12.7" below his fastball, from a slot 0.1 (degrees) away, with a 38.8% whiff rate over 470 pitches. |
+| **The prediction** | Applying Yesavage's four-seamer-to-splitter movement change to Vesia's four-seamer predicts 6.9" of IVB and 11.5" of arm-side run, 14.3" below his fastball: the same pitch the spec describes, reached a second way. |
 
 ## Why this project
 
@@ -32,7 +33,8 @@ The full analysis is in [`notebooks/vesia_splitter.ipynb`](notebooks/vesia_split
 | 4–5 | What's wrong with the changeup? | Measured its gaps from the four-seamer (5.7" of IVB, 2.3 (degrees) of VAA) and its release: 6.6 (degrees) lower arm angle, about 2.4 times the normal throw-to-throw variation, holding against both batter sides. |
 | 6 | What does a good splitter look like? | Benchmarked 59 MLB splitters (100+ pitches). Compared the 10 thrown from slots of 50 (degrees) or higher and checked which traits go with whiffs: speed gap from the fastball (−0.52), low spin (−0.40), moderate run (−0.34). |
 | 7–8 | What should his splitter be? | Wrote a spec where every target is tied to a number, and drew it as a target zone on his movement chart. |
-| 9–10 | Would it work? | Compared his changeup today, the splitter target and Yesavage's real splitter side by side. |
+| 9 | Would it work? | Compared his changeup today, the splitter target and Yesavage's real splitter, then predicted Vesia's splitter by measuring each pitch's movement direction (`arctan2`) and transferring Yesavage's four-seamer-to-splitter change onto Vesia's four-seamer. |
+| 10 | What's the story? | Summed up the case in one hero chart: drop below the fastball and arm-angle difference for the changeup, the target and Yesavage's splitter. |
 
 ![Vesia's arsenal with the splitter target zone](outputs/charts/step08_arsenal_with_splitter.png)
 
@@ -57,14 +59,16 @@ The full analysis is in [`notebooks/vesia_splitter.ipynb`](notebooks/vesia_split
 - **The changeup separates by speed, not movement.** It is 9.3 mph slower than the four-seamer but only 5.7" lower. His slider, by comparison, finishes 17.9" lower.
 - **The changeup has a release tell.** It comes out 6.6 (degrees) lower and about 5" further toward his arm side, at almost the same height. The difference is sideways, and it holds against right-handed hitters, who see 144 of his 149 changeups.
 - **High-slot splitters keep more rise.** The 10 high-slot splitters have a median of 4.9" of IVB against 2.2" for the rest, and their rise depends heavily on spin (0.84). The three pitchers with slots closest to Vesia's keep 6.7–8.4" at 1,300–1,450 rpm, which is why the target is 5–8", not the league's 2".
+- **A second method lands on the same pitch.** Yesavage's splitter moves 47.8 (degrees) below the direction of his four-seamer. Applying that change to Vesia's four-seamer predicts a splitter with 6.9" of IVB and 11.5" of arm-side run, 14.3" below his fastball. The rise and the drop land inside the spec, and the run is only 0.5" over it. Velocity is the one disagreement: copying Yesavage's 11.3 mph gap gives 80.8 mph, while the high-slot median gap gives 83.4 mph, so the target stays at 82.5–84.
 - **The changeup's good results rest on a small sample.** A 44.0% whiff rate and .231 xwOBA over 75 swings is promising, but the pitch's shape and release make it fragile over a full season. Yesavage's splitter gets similar results over 470 pitches from a pitch built on a real drop and a hidden release.
 
-![Vesia's changeup next to Yesavage's splitter, both from behind the pitcher](outputs/charts/step09_vesia_vs_yesavage.png)
+![Vesia's arsenal with the splitter predicted from Yesavage's pairing](outputs/charts/step09_predicted_splitter.png)
 
 ## Limitations
 
 - **The splitter is a target, not a thrown pitch.** Its shape and results are estimates from comparable pitchers, not measurements.
 - **Yesavage is a model, not a copy.** He is right-handed, throws about 2 mph harder, releases the ball about a foot higher, and most of his 2026 pitches came between May and July.
+- **The prediction rests on one pitcher.** It borrows Yesavage's total splitter movement and his direction change; adding more same-slot comparisons would turn it into a range instead of a single point.
 - **Small samples.** Vesia's changeup: 149 pitches and 75 swings. High-slot splitters: 10 pitchers.
 - **Correlation isn't causation.** The traits tied to whiffs describe patterns across 59 pitchers, not what would happen for every pitcher.
 - **What public data can't see.** Active spin is Savant's estimate, and the project can't account for grip, finger pressure, health or how comfortable Vesia would be learning a new pitch.
@@ -75,6 +79,7 @@ The full analysis is in [`notebooks/vesia_splitter.ipynb`](notebooks/vesia_split
 - Feature engineering: IVB and horizontal break in inches, arm-side normalization across handedness, vertical approach angle from release kinematics
 - Merging pitch-level data with four Savant leaderboards
 - Benchmarking with percentiles, group comparisons and correlation, and checking my own statistic when it was too sensitive to one pitch
+- Pitch movement modeling with trigonometry: movement direction with `arctan2`, offsets from arm angle, and transferring a comparison pitcher's fastball-to-splitter change
 - Data visualization in Matplotlib: movement charts from the pitcher's view, distributions, target zones and multi-panel comparisons
 - Turning analysis into a pitch specification with measurable targets and a real-world comparison
 
@@ -139,6 +144,7 @@ vesia-splitter-design/
 - El cambio se separa de la recta por velocidad, no por movimiento: es 9.3 mph más lento pero solo 5.7 pulgadas más bajo.
 - El cambio delata el lanzamiento: sale 6.6 (grados) más abajo y unas 5 pulgadas más hacia el lado del brazo, algo que un bateador puede ver.
 - Los splitters lanzados desde ángulos altos mantienen más subida (4.9 pulgadas contra 2.2), por eso la meta para Vesia es de 5 a 8 pulgadas.
+- Un segundo método llega al mismo pitcheo: al aplicar a la recta de Vesia el cambio de dirección que Yesavage hace de su recta a su splitter, el splitter previsto tiene 6.9 pulgadas de quiebre vertical inducido y 11.5 pulgadas hacia el lado del brazo, 14.3 pulgadas por debajo de la recta.
 - Los buenos números del cambio vienen de una muestra pequeña (75 swings); el splitter de Yesavage logra resultados parecidos en 470 lanzamientos.
 
 **Sobre mí:** exjugador universitario formado en el béisbol venezolano, entrenador de bateo certificado por Driveline y estudiante de la maestría en Sistemas de Información en Point Park University. Estoy aprendiendo a combinar lo que dicen los números con cómo el cuerpo realmente lanza y batea.
